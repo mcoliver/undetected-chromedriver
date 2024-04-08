@@ -226,7 +226,11 @@ class Patcher(object):
                 pass
 
     def patch(self):
-        self.patch_exe()
+        if not self.is_binary_patched():
+            logger.info("Binary not patched, patching")
+            self.patch_exe()
+        else:
+            logger.info("Binary is patched!")
         return self.is_binary_patched()
 
     def fetch_release_number(self):
